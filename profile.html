@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Latest news</title>
+    <!-- Fonts -->
+    <link rel="stylesheet" href="css/font.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="wrapper v-center f-between">
+        <a href="#" class="logo" title="logo">
+          <img src="#" alt="company logo">
+        </a>
+        <div class="action-box">
+          <a href="profile.html" title="My profile">voopsc</a>
+          <a href="#" title="logout">Logout</a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="profile">
+        <div class="wrapper">
+          <div class="full">
+            <h1 class="title-main">Profile</h1>
+          </div>
+          <div class="full-width">
+            <form class="profile-form form-main flex" action="#" method="post" enctype="multipart/form-data">
+              <div class="one-of-three">
+                <fieldset>
+                  <span class="label">You avatar</span>
+                  <div class="img-wrp">
+                    <img src="img/user.jpg" alt="user avatar">
+                  </div>
+                  <label class="picture-select hidden-input">
+                    <input type="file" name="user_photo">
+                    <span class="label">Select photo</span>
+                  </label>
+                </fieldset>
+              </div>
+              <div class="two-of-three">
+                <fieldset>
+                  <span class="label">Your login</span>
+                  <label>
+                    <input type="text" name="user_name" value="" minlength="2" required tabindex="1">
+                  </label>
+                </fieldset>
+                <fieldset>
+                  <span class="label">Password</span>
+                  <label>
+                    <input type="password" name="user_password" value="" minlength="3" required tabindex="2">
+                  </label>
+                </fieldset>
+                <fieldset>
+                  <span class="label">Phone number</span>
+                  <label>
+                    <input type="tel" name="user_phone" value="+380" required tabindex="3" maxlength="17">
+                  </label>
+                </fieldset>
+                <fieldset>
+                  <span class="label">Your email <small>(optional)</small> </span>
+                  <label>
+                    <input type="email" name="user_email" value="" tabindex="4">
+                  </label>
+                </fieldset>
+                <fieldset>
+                  <button type="submit" name="submit" class="btn" tabindex="6">Send</button>
+                </fieldset>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
