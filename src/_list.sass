@@ -1,0 +1,33 @@
+.list
+  > li
+    display: flex
+    flex-wrap: wrap
+    .box
+      height: 100%
+
+.list-two-items,
+.list-three-items,
+.list-four-items,
+.list-five-items
+  > li
+    min-width: 14rem
+    padding: 15px
+  &.nopadding
+    > li
+      padding: 0
+
+.list-two-items
+  > li
+    flex: 1 1 100%
+
+.list-three-items
+  > li
+    flex: 1 33.33%
+
+.list-four-items
+  > li
+    flex: 1 1 25%
+
+.list-five-items
+  > li
+    flex: 1 1 20%

@@ -4,6 +4,14 @@ body {
   color: #fff;
 }
 
+a {
+  text-decoration: none;
+  transition: all 0.3s linear;
+}
+a:hover {
+  color: #efc42b;
+}
+
 header,
 footer,
 section,
@@ -21,6 +29,11 @@ li {
   box-sizing: border-box;
 }
 
+img,
+svg {
+  vertical-align: middle;
+}
+
 h1,
 h1,
 h1,
@@ -33,11 +46,38 @@ small,
 a {
   box-sizing: border-box;
   color: inherit;
+  line-height: 1.5;
 }
 
 .title-main {
-  font: bold 1.8em/1.5 "Montserrat", Arial, Helvetica, sans-serif;
+  font: 900 1.8em/1.5 "Montserrat", Arial, Helvetica, sans-serif;
   margin-bottom: 1.1rem;
+}
+
+.title {
+  font: 500 1.3em/1.5 "Montserrat", Arial, Helvetica, sans-serif;
+  margin-bottom: 1.1rem;
+}
+
+.logo {
+  max-width: 120px;
+  padding: 0 15px;
+}
+
+.img-wrp img,
+.img-wrp svg,
+.icon img,
+.icon svg {
+  width: 100%;
+}
+
+.icon {
+  min-width: 15px;
+  min-height: 15px;
+}
+
+.link-text {
+  font: 900 1em/1.5 "Montserrat", Arial, Helvetica, sans-serif;
 }
 
 .btn {
@@ -73,6 +113,22 @@ section,
 section,
 .wrapper {
   justify-content: center;
+}
+
+.full {
+  padding: 0 15px;
+}
+
+.full {
+  width: 100%;
+}
+
+.f-between {
+  justify-content: space-between;
+}
+
+.v-center {
+  align-items: center;
 }
 
 .text-center {
@@ -178,6 +234,44 @@ form .hidden-input .label {
   display: inline-flex;
 }
 
+.list > li {
+  display: flex;
+  flex-wrap: wrap;
+}
+.list > li .box {
+  height: 100%;
+}
+
+.list-two-items > li,
+.list-three-items > li,
+.list-four-items > li,
+.list-five-items > li {
+  min-width: 14rem;
+  padding: 15px;
+}
+.list-two-items.nopadding > li,
+.list-three-items.nopadding > li,
+.list-four-items.nopadding > li,
+.list-five-items.nopadding > li {
+  padding: 0;
+}
+
+.list-two-items > li {
+  flex: 1 1 100%;
+}
+
+.list-three-items > li {
+  flex: 1 33.33%;
+}
+
+.list-four-items > li {
+  flex: 1 1 25%;
+}
+
+.list-five-items > li {
+  flex: 1 1 20%;
+}
+
 .login-block {
   align-items: center;
   justify-content: center;
@@ -193,4 +287,37 @@ form .hidden-input .label {
   max-width: 19rem;
   color: #fff;
   box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.header {
+  padding: 15px 0;
+}
+.header .action-box {
+  padding: 0 15px;
+}
+.header .action-box a,
+.header .action-box p,
+.header .action-box span {
+  font: 700 0.9em/1.5 "Montserrat", Arial, Helvetica, sans-serif;
+  margin: 0 1rem 0 0;
+}
+.header .action-box a:last-child,
+.header .action-box p:last-child,
+.header .action-box span:last-child {
+  margin: 0;
+}
+
+.post-list > li {
+  max-width: 532.5px;
+}
+.post-list .box {
+  border-radius: 10px;
+  background: #1c1b1b;
+}
+.post-list .title-box {
+  padding: 1.5rem;
+  height: 100%;
+}
+.post-list p {
+  margin-bottom: 1.87rem;
 }
