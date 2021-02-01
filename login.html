@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wellcome</title>
+    <!-- Fonts -->
+    <link rel="stylesheet" href="css/font.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <section class="login-block">
+      <div class="wrapper">
+        <div class="login-wrp">
+          <h1 class="title-main text-center">Wellcome</h1>
+          <form class="form-main" action="index.html" method="post">
+            <fieldset>
+              <span class="label">Your name</span>
+              <label>
+                <input type="text" name="user_name" value="" minlength="2" required tabindex="1">
+              </label>
+            </fieldset>
+            <fieldset>
+              <span class="label">Password</span>
+              <label>
+                <input type="password" name="user_password" value="" minlength="3" required tabindex="2">
+              </label>
+            </fieldset>
+            <fieldset>
+              <button type="submit" name="submit" class="btn" tabindex="4">Send</button>
+            </fieldset>
+            <fieldset>
+              <label class="hidden-input">
+                <input type="checkbox" name="remember_user" value="1" tabindex="3">
+                <span class="checkmark"></span>
+                <span class="label">Remember me</span>
+              </label>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
