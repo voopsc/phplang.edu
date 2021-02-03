@@ -1,8 +1,8 @@
 <?php
 
-    /**
-     *
-     */
+    /** Database connect
+    *
+    */
     class Db
     {
       public function getConnection()
