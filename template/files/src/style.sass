@@ -14,8 +14,9 @@ body
 a
   text-decoration: none
   +animate
-  &:hover
-    color: $color-one
+  &:not(.btn)
+    &:hover
+      color: $color-one
 
 header,
 footer,
@@ -83,9 +84,7 @@ svg
 
 // Posts
 .post-list
-  > li
-    max-width: 532.5px
-  .box
+  .box 
     border-radius: 10px
     background: $background-elements
   .title-box

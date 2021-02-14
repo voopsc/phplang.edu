@@ -6,7 +6,9 @@
     error_reporting(E_ALL);
 
     // 2. Project main settings
+    session_start();
     define('ROOT', __DIR__);
+    define('TEMPLATE', ROOT . '/template/');
     include_once(ROOT . '/core/components/Autoload.php');
 
     // 3. Routing
