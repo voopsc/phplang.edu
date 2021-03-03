@@ -6,9 +6,7 @@
       {
 
         /** Get user data by user id - $id integer
-        *
         * @param string
-        *
         * @return array
         */
         public function read($userPhone)
@@ -26,9 +24,7 @@
 
 
         /** Get user data by password - $password string
-        *
         * @param string
-        *
         * @return array
         */
         public function getUserByPassword($password)
@@ -65,6 +61,50 @@
          $result->bindParam(':user_email', $options['user_email'], PDO::PARAM_STR);
          $result->bindParam(':user_role', $options['user_role'], PDO::PARAM_INT);
          return $result->execute();
+        }
+
+        /** Update user info
+        * @param array with user base data
+        * @return bolean
+        */
+        public function update($options)
+        {
+          $db = new Db;
+          $connection = $db->getConnection();
+
+          $sql = 'UPDATE user
+               SET
+                  user_login = :user_login,
+                  user_phone = :user_phone,
+                  user_email = :user_email
+               WHERE id = :id';
+
+          $result = $connection->prepare($sql);
+          $result->bindParam(':id', $options['id'], PDO::PARAM_INT);
+          $result->bindParam(':user_login', $options['user_login'], PDO::PARAM_STR);
+          $result->bindParam(':user_phone', $options['user_phone'], PDO::PARAM_STR);
+          $result->bindParam(':user_email', $options['user_email'], PDO::PARAM_STR);
+          return $result->execute();
+        }
+
+        /** Update user password
+        * @param integer $id with user id
+        * @param string $pass with new password
+        */
+        public function updatePassword($id, $pass)
+        {
+          $db = new Db;
+          $connection = $db->getConnection();
+
+          $sql = 'UPDATE user
+               SET
+                  user_password = :user_password
+               WHERE id = :id';
+
+          $result = $connection->prepare($sql);
+          $result->bindParam(':id', $id, PDO::PARAM_INT);
+          $result->bindParam(':user_password', $pass, PDO::PARAM_STR);
+          return $result->execute();
         }
         // end of class
       }

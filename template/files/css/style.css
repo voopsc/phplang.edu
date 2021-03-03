@@ -66,6 +66,12 @@ a {
   margin-bottom: 7px;
 }
 
+.done {
+  font: 400 0.9em/1.5 "Montserrat", Arial, Helvetica, sans-serif;
+  color: green;
+  margin-bottom: 7px;
+}
+
 .logo {
   max-width: 120px;
   padding: 0 15px;
@@ -372,4 +378,8 @@ form .picture-select:hover {
 
 .profile-form .img-wrp {
   margin-bottom: 1rem;
+}
+
+.user-avatar {
+  min-height: 350px;
 }

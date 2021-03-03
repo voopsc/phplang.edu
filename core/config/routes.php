@@ -1,7 +1,8 @@
 <?php
 
     return array(
-      '^news$'                                     => 'site/news',
+      '^profile/delete-image$'                     => 'site/deleteImage',
+      '^profile$'                                  => 'site/profile',
       '^login$'                                    => 'site/login',
       '^logout$'                                   => 'site/logout',
       '^registration$'                             => 'site/registration',

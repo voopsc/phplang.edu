@@ -21,7 +21,7 @@
             <span class="label">Phone number</span>
             <label>
               <input type="tel" autocomplete="tel" name="user_phone" value="<?php echo $options['user_phone'] ?>" required tabindex="3" minlength="<?php echo $phoneAllowedLength; ?>" maxlength="<?php echo $phoneAllowedLength; ?>"
-              pattern="[+380\s][0-9\s]+">
+              pattern="[+380\s][0-9\s]+" placeholder="+38 0__ ___ __ __">
             </label>
           </fieldset>
           <fieldset>

@@ -5,7 +5,7 @@
         </a>
         <div class="action-box">
           <?php if (isset($userData) && !empty($userData)): ?>
-            <a href="/profile/<?php echo $userData['id']; ?>" title="My profile"><?php echo $userData['user_login']; ?></a>
+            <a href="/profile" title="My profile"><?php echo $userData['user_login']; ?></a>
             <a href="/logout" title="logout">Logout</a>
             <?php else: ?>
             <a href="/login" title="logout">Login</a>

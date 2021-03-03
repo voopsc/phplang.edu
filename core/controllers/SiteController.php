@@ -10,6 +10,9 @@
         $user = new User;
         $userData = $user->getLoggedUserData();
 
+        $blog = new BlogMapper;
+        $publications = $blog->getUserPostList();
+
         require_once(TEMPLATE . '/view/home.php');
         return true;
       }
@@ -20,11 +23,10 @@
         $errors = [];
         $user = new User;
 
-        // $userLogged = $user->checkLogged();
-        // if (!empty($userLogged)) {
-        //   header("Location: /news");
-        // }
-
+        $userLogged = $user->getLoggedUserData();
+        if (!empty($userLogged)) {
+          header("Location: /");
+        }
 
         $loginAllowedLength = (int) 2;
         $passwordAllowedLength = (int) 6;
@@ -101,10 +103,10 @@
       {
         $user = new User;
 
-        // $userLogged = $user->checkLogged();
-        // if (!empty($userLogged)) {
-        //   header("Location: /news");
-        // }
+        $userLogged = $user->getLoggedUserData();
+        if (!empty($userLogged)) {
+          header("Location: /");
+        }
 
         $errors = [];
 
@@ -122,20 +124,32 @@
           $db = new UserMapper;
 
           $options['user_phone'] = $_POST['user_phone'];
+          // check phone valid
+          // Check lenth of user phone number
+          if (!$user->checkRequiredLength($options['user_phone'], $phoneAllowedLength)) {
+            $errors[] = "Your phone number must not be less than {$phoneAllowedLength} symbols";
+          }
+          if (!$user->isValidPhoneMask($options['user_phone'])) {
+            $errors[] = 'Please enter phone number in valid format: +38 0__ ___ __ __';
+          }
+
           $options['user_password'] = $_POST['user_password'];
           if (array_key_exists('remember_me', $_POST)) {
             $options['remember_me'] = $_POST['remember_me'];
           }
 
-          $userData = $db->read($options['user_phone']);
-          if (empty($userData)) {
-            $errors[] = 'There is no user with this data';
-          } else {
-            $result = password_verify($options['user_password'], $userData['user_password']);
-            if (!$result) {
-              $errors[] = 'Incorrect password';
+          if (empty($errors)) {
+            $userData = $db->read($options['user_phone']);
+            if (empty($userData)) {
+              $errors[] = 'There is no user with this data';
+            } else {
+              $result = password_verify($options['user_password'], $userData['user_password']);
+              if (!$result) {
+                $errors[] = 'Incorrect password';
+              }
             }
           }
+
           if (empty($errors)) {
             switch ($options['remember_me']) {
               case 0: $_SESSION['isLogged'] = $userData['user_password']; break;
@@ -161,6 +175,97 @@
         setcookie('isLogged', $options['user_phone'], time() - 3600);
 
         header("Location: $referrer");
+      }
+
+      public function actionProfile()
+      {
+        $user = new User;
+        $userData = $user->getLoggedUserData();
+        $userAvatar = $user->getImage($userData['id']);
+        $errors = [];
+        $notices = [];
+
+        if ($userData && is_array($userData)) {
+
+          if (isset($_POST['submit'])) {
+            $options['id'] = $userData['id'];
+            $options['user_login'] = $_POST['user_login'];
+            $options['user_phone'] = $_POST['user_phone'];
+            $options['user_email'] = $_POST['user_email'];
+
+            $updating = new UserMapper;
+            $result = $updating->update($options);
+
+            if ($result) {
+              $notices[] = 'Data was succesfully changed';
+            }
+
+            // change password block
+            {
+              if (!empty($_POST['user_password'])) {
+                $userPassword = password_verify($_POST['user_password'], $userData['user_password']);
+                if ($userPassword) {
+                  if ($_POST['new_password'] === $_POST['new_pass_repeat']) {
+                    $newPassword = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+                    $updPassord = $updating->updatePassword($userData['id'], $newPassword);
+                    $_SESSION['isLogged'] = $newPassword;
+                    if ($updPassord) {
+                      $notices[] = 'Password was succesfully changed';
+                    }
+                  } else {
+                    $errors[] = 'Repeated password doesn`t match new password';
+                  }
+                } else {
+                  $errors[] = 'Error password';
+                }
+              }
+            }
+
+            // сhange user profile avatar
+            {
+
+              if (isset($_FILES) && !empty($_FILES)) {
+
+                if (is_uploaded_file($_FILES['image']["tmp_name"])) {
+                  if ($_FILES['image']['error'] === 0) {
+
+                    $fileName = $_FILES["image"]["name"];
+                    $result = explode('.', $fileName);
+                    $allowedTypes = include(ROOT . '/core/config/file_types.php');
+                    $type = array_pop($result);
+
+                    if (in_array('.'.$type, $allowedTypes)) {
+                      $user->deleteImage($userData['id']);
+                      $uploadedImg = move_uploaded_file($_FILES["image"]["tmp_name"], TEMPLATE . "/upload/user/" . $userData['id'] . '.' . $type);
+                      $notices[] = 'Image was succesfully uploaded';
+                    }
+                  } else {
+                    $errors[] = 'There is some error with uploading photo';
+                  }
+                }
+
+              }
+
+            }
+
+            header("Location: /profile/");
+          }
+
+          require_once(TEMPLATE . '/view/user/profile.php');
+          return true;
+        }
+        else {
+          header("Location: /login");
+        }
+      }
+
+      public function actionDeleteImage()
+      {
+        $user = new User;
+        $userData = $user->getLoggedUserData();
+
+        $user->deleteImage($userData['id']);
+        header("Location: /profile");
       }
       // end of class
     }

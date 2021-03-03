@@ -43,5 +43,56 @@
        }
        return false;
      }
+
+     /** Get user avatar
+     * @param int $id with user id
+     * @return string with path to user image
+     */
+     public function getImage($id)
+     {
+       $image = '/template/files/img/user.jpg';
+       $types = include(ROOT . '/core/config/file_types.php');
+
+       $path = '/template/upload/user/' . $id;
+
+       foreach ($types as $type) {
+         if (file_exists(ROOT . $path . $type)) {
+           return $path . $type;
+         }
+       }
+       return $image;
+     }
+
+     /** Clear user avatar
+     * @param int $id with user id
+     * @return void and delete exist image
+     */
+     public function deleteImage($id)
+     {
+       $image = '/template/files/img/user.jpg';
+       $types = include(ROOT . '/core/config/file_types.php');
+
+       $path = '/template/upload/user/' . $id;
+
+       foreach ($types as $type) {
+         if (file_exists(ROOT . $path . $type)) {
+           unlink(ROOT . $path . $type);
+         }
+       }
+       return ;
+     }
+
+     /** Check user phone mask
+     * @param string with phone number
+     */
+     public function isValidPhoneMask($string)
+     {
+       (string) $string;
+
+       $validation = preg_match('~[+38] [0]([1-9]{2}) ([0-9]{3}) ([0-9]{2}) ([0-9]{2})~', $string);
+
+       return $validation ? true : false;
+     }
+
      // end of class
    }
